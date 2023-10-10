@@ -27,16 +27,14 @@ export class AskQuestion extends OpenAPIRoute {
 		context: any,
 		data: Record<string, any>
 	) {
-		console.log(JSON.stringify(env.AI, null, 2));
 		const ai = new Ai(env.AI);
-		const { result } = await ai.run("@cf/meta/llama-2-7b-chat-int8", {
+		const result = await ai.run("@cf/meta/llama-2-7b-chat-int8", {
 			prompt: data.body,
 		});
-		console.log(result);
 
 		return {
 			success: true,
-			result,
+			result: { response: result.response },
 		};
 	}
 }
