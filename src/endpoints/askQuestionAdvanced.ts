@@ -4,10 +4,10 @@ import {
 } from "@cloudflare/itty-router-openapi";
 import { Ai } from "@cloudflare/ai";
 
-export class AskQuestion extends OpenAPIRoute {
+export class AskQuestionAdvanced extends OpenAPIRoute {
 	static schema: OpenAPIRouteSchema = {
-		summary: "Ask Llama2 a question",
-		requestBody: String,
+		summary: "Ask Llama2 a question with a given system message",
+		requestBody: { system: String, user: String },
 		responses: {
 			"200": {
 				description: "Returns the response to the question",
@@ -29,8 +29,8 @@ export class AskQuestion extends OpenAPIRoute {
 	) {
 		const ai = new Ai(env.AI);
 		const messages = [
-			{ role: "system", content: "you are a friendly assistant" },
-			{ role: "user", content: data.body },
+			{ role: "system", content: data.body.system },
+			{ role: "user", content: data.body.user },
 		];
 		const result = await ai.run("@cf/meta/llama-2-7b-chat-int8", { messages });
 
