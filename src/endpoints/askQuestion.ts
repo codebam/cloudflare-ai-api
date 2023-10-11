@@ -13,9 +13,7 @@ export class AskQuestion extends OpenAPIRoute {
 				description: "Returns the response to the question",
 				schema: {
 					success: Boolean,
-					result: {
-						response: String,
-					},
+					response: String,
 				},
 			},
 		},
@@ -36,7 +34,7 @@ export class AskQuestion extends OpenAPIRoute {
 
 		return {
 			success: true,
-			result: { response: result.response },
+			response: result.response,
 		};
 	}
 }

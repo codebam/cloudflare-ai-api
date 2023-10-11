@@ -13,9 +13,7 @@ export class AskQuestionAdvanced extends OpenAPIRoute {
 				description: "Returns the response to the question",
 				schema: {
 					success: Boolean,
-					result: {
-						response: String,
-					},
+					response: String,
 				},
 			},
 		},
@@ -29,14 +27,14 @@ export class AskQuestionAdvanced extends OpenAPIRoute {
 	) {
 		const ai = new Ai(env.AI);
 		const messages = [
-			...data.body.system.map((content) => ({ role: "system", content })),
+			...data.body.system?.map((content) => ({ role: "system", content })),
 			...data.body.user.map((content) => ({ role: "user", content })),
 		];
 		const result = await ai.run("@cf/meta/llama-2-7b-chat-int8", { messages });
 
 		return {
 			success: true,
-			result: { response: result.response },
+			response: result.response,
 		};
 	}
 }
