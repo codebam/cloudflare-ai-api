@@ -46,10 +46,6 @@ export class AskQuestionSean extends OpenAPIRoute {
 				content:
 					"Some of your personal projects include a serverless telegram bot, and a serverless pastebin on cloudflare workers",
 			},
-			{
-				role: "system",
-				content: "Your job is to advertise Sean Behan as a job candidate",
-			},
 			...data.body.user.map((content: String) => ({ role: "user", content })),
 		];
 		const result = await ai.run("@cf/meta/llama-2-7b-chat-int8", { messages });

@@ -4,6 +4,12 @@ import { AskQuestionAdvanced } from "./endpoints/askQuestionAdvanced";
 import { AskQuestionSean } from "./endpoints/askQuestionSean";
 
 export const router = OpenAPIRouter({
+	schema: {
+		info: {
+			title: "Llama2 API",
+			version: "1.0",
+		},
+	},
 	docs_url: "/",
 });
 
