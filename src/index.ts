@@ -2,6 +2,7 @@ import { OpenAPIRouter } from "@cloudflare/itty-router-openapi";
 import { AskQuestion } from "./endpoints/askQuestion";
 import { AskQuestionAdvanced } from "./endpoints/askQuestionAdvanced";
 import { AskQuestionSean } from "./endpoints/askQuestionSean";
+import { createCors } from "itty-router";
 
 export const router = OpenAPIRouter({
 	schema: {
@@ -12,6 +13,11 @@ export const router = OpenAPIRouter({
 	},
 	docs_url: "/",
 });
+
+const { preflight, corsify } = createCors();
+
+// embed preflight upstream to handle all OPTIONS requests
+router.all("*", preflight);
 
 router.post("/api/question/", AskQuestion);
 router.post("/api/question/custom", AskQuestionAdvanced);
@@ -28,5 +34,6 @@ router.all("*", () =>
 );
 
 export default {
-	fetch: router.handle,
+	fetch: async (request, env, ctx) =>
+		router.handle(request, env, ctx).then(corsify),
 };
