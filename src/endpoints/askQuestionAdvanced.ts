@@ -7,7 +7,7 @@ import { Ai } from "@cloudflare/ai";
 export class AskQuestionAdvanced extends OpenAPIRoute {
 	static schema: OpenAPIRouteSchema = {
 		summary: "Ask Llama2 a question with a given system message",
-		requestBody: { system: String, user: String },
+		requestBody: { system: [String], user: [String] },
 		responses: {
 			"200": {
 				description: "Returns the response to the question",
@@ -29,8 +29,8 @@ export class AskQuestionAdvanced extends OpenAPIRoute {
 	) {
 		const ai = new Ai(env.AI);
 		const messages = [
-			{ role: "system", content: data.body.system },
-			{ role: "user", content: data.body.user },
+			...data.body.system.map((content) => ({ role: "system", content })),
+			...data.body.user.map((content) => ({ role: "user", content })),
 		];
 		const result = await ai.run("@cf/meta/llama-2-7b-chat-int8", { messages });
 
