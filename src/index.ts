@@ -1,6 +1,7 @@
 import { OpenAPIRouter } from "@cloudflare/itty-router-openapi";
 import { AskQuestion } from "./endpoints/askQuestion";
 import { AskQuestionAdvanced } from "./endpoints/askQuestionAdvanced";
+import { AskQuestionSean } from "./endpoints/askQuestionSean";
 
 export const router = OpenAPIRouter({
 	docs_url: "/",
@@ -8,6 +9,7 @@ export const router = OpenAPIRouter({
 
 router.post("/api/question/", AskQuestion);
 router.post("/api/question/custom", AskQuestionAdvanced);
+router.post("/api/question/sean", AskQuestionSean);
 
 router.all("*", () =>
 	Response.json(
