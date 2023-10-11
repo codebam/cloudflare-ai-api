@@ -2,6 +2,7 @@ import { OpenAPIRouter } from "@cloudflare/itty-router-openapi";
 import { AskQuestion } from "./endpoints/askQuestion";
 import { AskQuestionAdvanced } from "./endpoints/askQuestionAdvanced";
 import { AskQuestionSean } from "./endpoints/askQuestionSean";
+import { SentimentAnalysis } from "./endpoints/sentimentAnalysis";
 import { createCors } from "itty-router";
 
 export const router = OpenAPIRouter({
@@ -22,6 +23,7 @@ router.all("*", preflight);
 router.post("/api/question/", AskQuestion);
 router.post("/api/question/custom", AskQuestionAdvanced);
 router.post("/api/question/sean", AskQuestionSean);
+router.post("/api/sentiment", SentimentAnalysis);
 
 router.all("*", () =>
 	Response.json(
