@@ -8,13 +8,13 @@
     "start": "wrangler dev"
   },
   "dependencies": {
-    "@cloudflare/ai": "^1.0.15",
-    "@cloudflare/itty-router-openapi": "^1.0.1"
+    "@cloudflare/ai": "^1.0.29",
+    "@cloudflare/itty-router-openapi": "^1.0.3"
   },
   "devDependencies": {
-    "@cloudflare/workers-types": "^4.20230821.0",
-    "@types/node": "^20.5.7",
-    "@types/service-worker-mock": "^2.0.1",
-    "wrangler": "^3.0.0"
+    "@cloudflare/workers-types": "^4.20231025.0",
+    "@types/node": "^20.9.1",
+    "@types/service-worker-mock": "^2.0.4",
+    "wrangler": "^3.16.0"
   }
 }
