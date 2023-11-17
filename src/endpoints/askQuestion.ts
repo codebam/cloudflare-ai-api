@@ -30,7 +30,7 @@ export class AskQuestion extends OpenAPIRoute {
 			{ role: "system", content: "you are a friendly assistant" },
 			{ role: "user", content: data.body },
 		];
-		const result = await ai.run("@cf/meta/llama-2-7b-chat-int8", { messages });
+		const result = await ai.run("@cf/meta/llama-2-7b-chat-fp16", { messages });
 
 		return {
 			success: true,

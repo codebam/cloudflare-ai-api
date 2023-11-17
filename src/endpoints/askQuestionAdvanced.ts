@@ -30,7 +30,7 @@ export class AskQuestionAdvanced extends OpenAPIRoute {
 			...data.body.system?.map((content) => ({ role: "system", content })),
 			...data.body.user.map((content) => ({ role: "user", content })),
 		];
-		const result = await ai.run("@cf/meta/llama-2-7b-chat-int8", { messages });
+		const result = await ai.run("@cf/meta/llama-2-7b-chat-fp16", { messages });
 
 		return {
 			success: true,
